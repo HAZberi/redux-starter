@@ -7,15 +7,18 @@ let text = "    JavaScript     ";
 /* Task
     - Make sure text should not have any trailing and leading spaces.
     - Make sure text is in all lowercase.
-    - Create HTML Block that contains the text.
+    - Create HTML Element to wrap the text. 
+    - User should be able to specify HTML element of their choosing. 
 */
 
-const wrapperDiv = (str) => `<div>${str}</div>`;
+//implemented currying to separate out arguments and promote cleaner and working code.
+const wrap = (type) => (str) => `<${type}>${str}</${type}>`;
+
 const lowercase = (str) => str.toLowerCase();
 const trim = (str) => str.trim();
 
-const taskPiping = pipe(trim, lowercase, wrapperDiv);
-const taskComposing = compose(wrapperDiv, lowercase, trim);
+const taskPiping = pipe(trim, lowercase, wrap("p"));
+const taskComposing = compose(wrap("span"), lowercase, trim);
 
 
 console.log(taskPiping(text));
