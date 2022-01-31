@@ -1,7 +1,3 @@
-console.log("Hello World!");
+import store from "./store";
 
-const numbers = [1, 2, 3];
-
-const removed = numbers.filter((n) => n !== 2);
-
-console.log(removed);
+console.log(store);
