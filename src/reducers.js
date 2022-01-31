@@ -6,7 +6,7 @@ const reducer = (state = [], action) => {
       return [
         ...state,
         {
-          id: lastId++,
+          id: ++lastId,
           description: action.payload.description,
           resolved: false,
         },
