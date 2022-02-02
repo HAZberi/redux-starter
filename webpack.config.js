@@ -4,12 +4,12 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "app.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 7000
+    port: 4000,
   },
   mode: "development",
-  devtool: "source-map"
+  devtool: "source-map",
 };
