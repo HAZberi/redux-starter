@@ -3,6 +3,7 @@ import reducer from "./reducers";
 const createStore = (reducer) => {
   //Using closures and composition to create a private property in functional programming.
   let state;
+  let listeners = [];
 
   const getState = () => {
     return state;
@@ -10,9 +11,18 @@ const createStore = (reducer) => {
 
   const dispatch = (action) => {
     state = reducer(state, action);
+
+    for (let i = 0; i < listeners.length; i++) {
+      listeners[i]();
+    }
+  };
+
+  const subscribe = (listener) => {
+    listeners.push(listener);
   };
 
   return {
+    subscribe,
     getState,
     dispatch,
   };
