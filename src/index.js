@@ -1,6 +1,6 @@
 import configureStore from "./store/configureStore";
 
-import { bugAdded, bugRemoved, bugResolved, getUnresolvedBugs } from "./store/bugs";
+import { bugAdded, bugRemoved, bugResolved, getUnresolvedBugs, selectUnresolvedBugs } from "./store/bugs";
 import { projectAdded, projectRemoved } from "./store/projects";
 
 const store = configureStore();
@@ -30,4 +30,12 @@ store.dispatch(projectRemoved({ id: 1 }));
 console.log(store.getState());
 
 //Get Unresolved Bugs
-console.log(getUnresolvedBugs(store.getState()));
+const x = getUnresolvedBugs(store.getState());
+const y = getUnresolvedBugs(store.getState());
+
+console.log("Unmemoized", x === y);
+
+const a = selectUnresolvedBugs(store.getState());
+const b = selectUnresolvedBugs(store.getState());
+
+console.log("Memoized", a === b);
