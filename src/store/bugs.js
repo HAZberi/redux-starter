@@ -29,12 +29,8 @@ export const { bugAdded, bugRemoved, bugResolved } = bugs.actions;
 export default bugs.reducer;
 
 //Selector
-//A normal unmemoized selector
-export const getUnresolvedBugs = (state) =>
-  state.entities.bugs.filter((bug) => !bug.resolved);
-
 //A memoized selector instatnt
-export const selectUnresolvedBugs = createSelector(
+export const getUnresolvedBugs = createSelector(
   (state) => state.entities.bugs,
   (bugs) => bugs.filter((bug) => !bug.resolved)
 );
