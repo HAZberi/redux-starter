@@ -1,6 +1,6 @@
 import configureStore from "./store/configureStore";
 
-// import { bugAdded, bugRemoved, bugResolved } from "./store/bugs";
+import { bugAdded, bugRemoved, bugResolved } from "./store/bugs";
 import { projectAdded, projectRemoved } from "./store/projects";
 
 const store = configureStore();
@@ -9,15 +9,15 @@ const unsubscribe = store.subscribe(() => {
   console.log("Store Changed!", store.getState());
 });
 
-// store.dispatch(bugAdded({ description: "Bug 01" }));
-// store.dispatch(bugAdded({ description: "Bug 02" }));
-// store.dispatch(bugAdded({ description: "Bug 03" }));
-// store.dispatch(bugResolved({ id: 1 }));
-// store.dispatch(bugResolved({ id: 2 }));
+store.dispatch(bugAdded({ description: "Bug 01" }));
+store.dispatch(bugAdded({ description: "Bug 02" }));
+store.dispatch(bugAdded({ description: "Bug 03" }));
+store.dispatch(bugResolved({ id: 1 }));
+store.dispatch(bugResolved({ id: 2 }));
 
-// // unsubscribe();
+// unsubscribe();
 
-// store.dispatch(bugRemoved({ id: 1 }));
+store.dispatch(bugRemoved({ id: 1 }));
 
 store.dispatch(projectAdded({ name: "Project 01" }));
 store.dispatch(projectAdded({ name: "Project 02" }));
