@@ -17,7 +17,15 @@ const unsubscribe = store.subscribe(() => {
   console.log("Store Changed!", store.getState());
 });
 
-store.dispatch(memberAdded({ name: "Mosh" }));
+//store.dispatch(memberAdded({ name: "Mosh" }));
+
+//Dispatching Functions instead of actions
+store.dispatch((dispatch, getState) => {
+  //A function is needed to be passed in place of action to get the data from API
+  //Once the data is received or there is error (fulfilled/rejected) from the api, action can be dispatched
+  dispatch({ type: "bugsReceived", payload: [1, 2, 3] });
+});
+
 // store.dispatch(memberAdded({ name: "Hassaan" }));
 // store.dispatch(memberAdded({ name: "Jonas" }));
 
