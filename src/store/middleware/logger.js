@@ -1,4 +1,5 @@
-const logger = store => next => action => {
+const logger = param => store => next => action => {
+    console.log("Passed params to middleware", param);
     console.log("Store", store);
     console.log("Next", next);
     console.log("Action Dispatched", action);
