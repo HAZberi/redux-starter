@@ -7,8 +7,7 @@ const api =
   async (action) => {
     if (action.type !== apiCallBegan.type) return next(action);
 
-    
-    const { url, method, onSuccess, onError, onStart } = action.payload;
+    const { url, method, onSuccess, onError, onStart, data } = action.payload;
     //Set loading to true
     dispatch({ type: onStart });
 
@@ -19,6 +18,7 @@ const api =
         baseURL: "http://localhost:9001/api",
         url,
         method,
+        data,
       });
 
       //Track API Call Status
