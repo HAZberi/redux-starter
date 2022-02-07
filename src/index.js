@@ -1,4 +1,5 @@
 import configureStore from "./store/configureStore";
+import { apiCallBegan } from "./store/api";
 
 const store = configureStore();
 
@@ -6,15 +7,13 @@ const unsubscribe = store.subscribe(() => {
   console.log("Store Changed!", store.getState());
 });
 
-store.dispatch({
-  type: "apiCallBegan",
-  payload: {
+store.dispatch(
+  apiCallBegan({
     url: "/bugs",
     method: "get",
     onSuccess: "bugsReceived",
-    onError: "apiCallFailed",
-  },
-});
+  })
+);
 
 //Chanllenge Task
 store.dispatch({

@@ -1,10 +1,11 @@
 import axios from "axios";
+import { apiCallBegan, apiCallFailed, apiCallSuccess } from "../api";
 
 const api =
   ({ getState, dispatch }) =>
   (next) =>
   async (action) => {
-    if (action.type !== "apiCallBegan") return next(action);
+    if (action.type !== apiCallBegan.type) return next(action);
 
     next(action);
 
@@ -16,10 +17,18 @@ const api =
         url,
         method,
       });
-      dispatch({ type: onSuccess, payload: response.data });
+
+      //Track API Call Status
+      dispatch(apiCallSuccess(response.data));
+
+      //Dispatch Success Action
+      if (onSuccess) dispatch({ type: onSuccess, payload: response.data });
     } catch (error) {
-      console.log(error.message);
-      dispatch({ type: onError, payload: error.message });
+      //Track API Call Status
+      dispatch(apiCallFailed(error.message));
+
+      //Dispatch Failure Action
+      if (onError) dispatch({ type: onError, payload: error.message });
     }
   };
 
