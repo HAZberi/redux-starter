@@ -9,6 +9,10 @@ const unsubscribe = store.subscribe(() => {
 
 store.dispatch(loadBugs());
 
+setTimeout(() => {
+  store.dispatch(loadBugs());
+}, 20000);
+
 //Chanllenge Task
 store.dispatch({
   type: "error",

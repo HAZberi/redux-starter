@@ -1,5 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
+import moment from "moment";
 
 let lastId = 0;
 
@@ -17,6 +18,7 @@ const bugs = createSlice({
     bugsReceived: (bugs, action) => {
       bugs.list = action.payload;
       bugs.loading = false;
+      bugs.lastFetch = Date.now();
     },
     bugsRequestFailed: (bugs, action) => {
       bugs.loading = false;
@@ -59,14 +61,26 @@ export default bugs.reducer;
 const url = "/bugs";
 
 //Action to get all the bugs via API
-export const loadBugs = () =>
-  apiCallBegan({
-    url,
-    method: "get",
-    onStart: bugsRequested.type,
-    onSuccess: bugsReceived.type,
-    onError: bugsRequestFailed.type,
-  });
+export const loadBugs = () => (dispatch, getState) => {
+  const { lastFetch } = getState().entities.bugs;
+
+  if (lastFetch) {
+    const timeSinceLastApiCall = moment(Date.now()).diff(lastFetch, "seconds");
+
+    //Set the api call limit in a global config module
+    if (timeSinceLastApiCall > 10) return;
+  }
+
+  dispatch(
+    apiCallBegan({
+      url,
+      method: "get",
+      onStart: bugsRequested.type,
+      onSuccess: bugsReceived.type,
+      onError: bugsRequestFailed.type,
+    })
+  );
+};
 
 //Selector
 //A memoized selector instatnt
