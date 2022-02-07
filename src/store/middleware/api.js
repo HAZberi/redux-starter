@@ -7,10 +7,13 @@ const api =
   async (action) => {
     if (action.type !== apiCallBegan.type) return next(action);
 
+    
+    const { url, method, onSuccess, onError, onStart } = action.payload;
+    //Set loading to true
+    dispatch({ type: onStart });
+
+    //Begin API Call
     next(action);
-
-    const { url, method, onSuccess, onError } = action.payload;
-
     try {
       const response = await axios({
         baseURL: "http://localhost:9001/api",
