@@ -9,7 +9,7 @@ const api =
 
     const { url, method, onSuccess, onError, onStart, data } = action.payload;
     //Set loading to true
-    dispatch({ type: onStart });
+    if (onStart) dispatch({ type: onStart });
 
     //Begin API Call
     next(action);
