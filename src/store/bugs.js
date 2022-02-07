@@ -1,4 +1,5 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { apiCallBegan } from "./api";
 
 let lastId = 0;
 
@@ -10,6 +11,9 @@ const bugs = createSlice({
     lastFetch: null,
   },
   reducers: {
+    bugsReceived: (bugs, action) => {
+      bugs.list = action.payload;
+    },
     bugAdded: (bugs, action) => {
       bugs.list.push({
         id: ++lastId,
@@ -32,9 +36,20 @@ const bugs = createSlice({
   },
 });
 
-export const { bugAdded, bugRemoved, bugResolved, bugAssigned } = bugs.actions;
+export const { bugAdded, bugRemoved, bugResolved, bugAssigned, bugsReceived } = bugs.actions;
 
 export default bugs.reducer;
+
+//Create a seprate config file of urls in production code.
+const url = "/bugs";
+
+//Action to get all the bugs via API
+export const loadBugs = () =>
+  apiCallBegan({
+    url,
+    method: "get",
+    onSuccess: bugsReceived.type,
+  });
 
 //Selector
 //A memoized selector instatnt

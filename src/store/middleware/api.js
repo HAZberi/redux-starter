@@ -22,7 +22,7 @@ const api =
       dispatch(apiCallSuccess(response.data));
 
       //Dispatch Success Action
-      if (onSuccess) dispatch({ type: onSuccess, payload: response.data });
+      if (onSuccess) dispatch({ type: onSuccess, payload: response.data.data });
     } catch (error) {
       //Track API Call Status
       dispatch(apiCallFailed(error.message));
