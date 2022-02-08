@@ -39,7 +39,7 @@ const bugs = createSlice({
   },
 });
 
-export const {
+const {
   bugAdded,
   bugRemoved,
   bugResolved,
