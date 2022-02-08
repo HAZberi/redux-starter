@@ -5,7 +5,10 @@ import {
   resolveBug,
   assignBug,
   deleteBug,
+  getBugsAssignedTo,
+  getUnresolvedBugs,
 } from "./store/bugs";
+import { memberAdded } from "./store/team";
 
 const store = configureStore();
 
@@ -46,7 +49,27 @@ store.dispatch(loadBugs());
 // }, 20000);
 
 ////-----------Chanllenge Task Toast Notifications--------------///
-// store.dispatch({
-//   type: "error",
-//   payload: { message: "An error has occured!" },
-// });
+// setTimeout(() => {
+//   store.dispatch({
+//     type: "error",
+//     payload: { message: "An error has occured!" },
+//   });
+// }, 5000);
+
+
+
+////-----------Add 2 Team Members To Redux Store Only--------------///
+// store.dispatch(memberAdded({ name: "Hassaan" }));
+// store.dispatch(memberAdded({ name: "Omer" }));
+
+////------------------Using Redux State Selectors-------------------///
+
+////-----------Log Bugs Assigned to Member With Id = 1--------------///
+// setTimeout(() => {
+//   console.log(getBugsAssignedTo(1)(store.getState()));
+// }, 3000);
+
+////-----------Log All Unresolved Bugs--------------///
+// setTimeout(() => {
+//   console.log(getUnresolvedBugs(store.getState()));
+// }, 5000);
