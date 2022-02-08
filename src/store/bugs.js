@@ -111,11 +111,11 @@ export const deleteBug = (bugId) =>
 //A memoized selector instatnt
 export const getUnresolvedBugs = createSelector(
   (state) => state.entities.bugs,
-  (bugs) => bugs.filter((bug) => !bug.resolved)
+  (bugs) => bugs.list.filter((bug) => !bug.resolved)
 );
 
 export const getBugsAssignedTo = (memberId) =>
   createSelector(
     (state) => state.entities.bugs,
-    (bugs) => bugs.filter((bug) => bug.assignedTo === memberId)
+    (bugs) => bugs.list.filter((bug) => bug.memberId === memberId)
   );
