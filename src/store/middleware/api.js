@@ -25,7 +25,14 @@ const api =
       dispatch(apiCallSuccess(response.data));
 
       //Dispatch Success Action
-      if (onSuccess) dispatch({ type: onSuccess, payload: response.data.data });
+      if (onSuccess)
+        dispatch({
+          type: onSuccess,
+          payload:
+            method === "delete"
+              ? { id: parseInt(url.split("/").slice(-1)[0]) }
+              : response.data.data,
+        });
     } catch (error) {
       //Track API Call Status
       dispatch(apiCallFailed(error.message));

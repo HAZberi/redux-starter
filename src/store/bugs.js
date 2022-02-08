@@ -100,6 +100,13 @@ export const assignBug = (bugId, memberId) =>
     onSuccess: bugAssigned.type,
   });
 
+export const deleteBug = (bugId) =>
+  apiCallBegan({
+    url: `${url}/${bugId}`,
+    method: "delete",
+    onSuccess: bugRemoved.type,
+  });
+
 //Selector
 //A memoized selector instatnt
 export const getUnresolvedBugs = createSelector(
